@@ -48,3 +48,28 @@ $("#addTrain").on("click", function(){
 	$("#firsttraintimeInput").val("");
 	$("#frequencyInput").val("");
 })
+
+//function that takes the trains from the database and renders them on the table
+database.ref().on("child_added", function (childSnapshot, prevChildKey){
+	//console.log(childSnapshot.val());
+
+	//create variables to store train information coming back from the database
+	var tName = childSnapshot.val().name;
+	var tDestination = childSnapshot.val().place;
+	var tTime = childSnapshot.val().time;
+	var tfrequency = childSnapshot.val().frequency;
+
+	//populating table with information from database
+	$("#trainTable > tbody").append("<tr><td>"+ tName +"</td> <td>"+ tDestination +"</td> <td>"+ tfrequency +"</td> <td>"+ tTime +"</td></tr>")
+
+}, function (errorObject){
+	console.log(errorObject.code);
+})
+
+
+
+
+
+
+
+
